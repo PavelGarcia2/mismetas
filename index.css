@@ -1,9 +1,11 @@
 *{
     font-family: Arial, Helvetica, sans-serif;
+
 }
 
 body{
     background-image: url(abstract.png);
+    height: 100vh;
 }
 
 header{
