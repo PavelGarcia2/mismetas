@@ -33,6 +33,7 @@ header h1{
     max-height: 500px;
     margin: 0 auto;
     margin-top: 20vh;
+    margin-bottom: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
