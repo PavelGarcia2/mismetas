@@ -1,99 +1,74 @@
-<?php
+<!DOCTYPE html>
+<html lang="es">
 
-$host = "localhost";
-$user = "root";
-$password = "";
-$database = "mismetas";
+<head>
+    <meta charset="utf-8">
+    <link href="./index.css" rel="stylesheet" type="text/css" />
+    <title>Iniciar sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 
-$conexion = new mysqli($host, $user, $password, $database);
+<body>
+    <main>
+        <div class="logo d-flex justify-content-center">
+            <h1>Taskats</h1>
+        </div>
 
-if ($conexion->connect_error) {
-    die("Conexion no establecida: " . $conexion->connect_error);
-}
+        <!-- Fetching the tasks of today which are not completed!-->
+        <?php
+        $json = file_get_contents('tasks.json');
+        $json_data = json_decode($json, true);
+        $json_encoded_data = json_encode($json_data["tasks"]);
 
-//establece que es un fichero json
-header("Content-Type: application/json");
-$metodo = $_SERVER['REQUEST_METHOD']; //guarda que tipo de metodo se ha usado GET,POST,PUT,PATCH
-//print_r($metodo); //esto devuelve que metodo se ha utilizado
+        // Display data 
+        //print_r($json_data["tasks"]);
+        ?>
+        <div class="container">
+            <div class="add_wrapp">
+                <input type="text" class="todo_name">
+                <button class="add_todo">Add</button>
+            </div>
+            <div class="todo_wrapp">
+                <div class="wrapper scrollable-inv">
+                    <?php foreach ($json_data["tasks"] as $value) : ?>
 
-$path = isset($_SERVER['PATH_INFO'])?$_SERVER['PATH_INFO']:'/';
+                        <div class="item" cid=<?php echo $value["ID"] ?> data-status="Not-Completed">
+                            <h5><?php echo $value["Name"] ?></h5>
+                            <div class="delete">x</div>
+                        </div>
 
-$buscarId =  explode('/',$path);
-$id = ($path !== '/')? end($buscarId):null;
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
 
+        <script>
+            // Sample JSON data with tasks
+            console.log("Hola");
+            var tasks = <?php echo $json_encoded_data; ?>;
+            console.log(tasks);
+            // Loop through tasks to dynamically generate CSS styles
+            tasks.forEach(task => {
+                let color = task.Color.toLowerCase(); // Convert color to lowercase
 
-switch ($metodo) {
-        //Consulta SELECT
-    case 'GET':
-        consulta($conexion,$id);
-        break;
-        //INSERT
-    case 'POST':
-        insertar($conexion);
-        break;
-        //UPDATE
-    case 'PUT':
-        actualizar($conexion,$id);
-        break;
-    case 'DELETE':
-        borrar($conexion,$id);
-        break;
-    default:
-        echo "Metodo no permitido";
-}
+                // Define a CSS rule for each task status and color
+                let style = `
+                .item[cid="${task.ID}"] {
+                    background-color: ${color};
+                }
+            `;
 
-function consulta($conexion,$id){
-    $sql = ($id===null)?"SELECT * FROM usuario":"SELECT * FROM usuario WHERE id= $id";
-    $resultado = $conexion->query($sql);
-
-    if($resultado){
-        $datos = array();
-        while($fila= $resultado->fetch_assoc()){
-            $datos[]=$fila;
-        }
-
-        echo json_encode($datos);
-    }
-}
-
-
-function insertar($conexion){
-    $dato = json_decode(file_get_contents('php://input'),true); //recoge la url
-    $nombre = $dato['nombre'];
-    
-
-    $sql = "INSERT INTO usuario (nombre) VALUES ('$nombre')";
-    $resultado = $conexion->query($sql);
-    if($resultado){
-        $dato['id'] = $conexion->insert_id;
-        echo json_encode($dato);
-    }else{
-        echo json_encode(array('error'=>'Error al crear ususario'));
-    }
-}
+                // Create a style element and append it to the document's head
+                let styleElement = document.createElement('style');
+                styleElement.innerHTML = style;
+                document.head.appendChild(styleElement);
+            });
+        </script>
 
 
-function borrar($conexion,$id){
-    $sql = "DELETE FROM usuario WHERE id= $id";
-    $resultado = $conexion->query($sql);
-    if($resultado){
-        echo json_encode(array('mensaje'=>'Usuario eliminado'));
-    }else{
-        echo json_encode(array('error'=>'Error al crear ususario'));
-    }
-}
 
-function actualizar($conexion,$id){
-    $dato = json_decode(file_get_contents('php://input'),true); //recoge la url
-    $nombre = $dato['nombre'];
 
-    $sql = "UPDATE usuario SET nombre ='$nombre' WHERE id= $id";
-    $resultado = $conexion->query($sql);
-    if($resultado){
-        echo json_encode(array('mensaje'=>'Usuario actualizado'));
-    }else{
-        echo json_encode(array('error'=>'Error al actualizar el usuario'));
-    }
-}
+    </main>
+</body>
 
-?>
+</html>

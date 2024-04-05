@@ -1,0 +1,83 @@
+{
+    "tasks": [
+      {
+        "ID": "1",
+        "Name": "Go to the gym",
+        "Status": "Completed",
+        "Color": "#FFD1DC"
+      },
+      {
+        "ID": "2",
+        "Name": "Wake up",
+        "Status": "Not-Completed",
+        "Color": "#ADD8E6"
+      },
+      {
+        "ID": "3",
+        "Name": "Read a book",
+        "Status": "Not-Completed",
+        "Color": "#FFD700"
+      },
+      {
+        "ID": "4",
+        "Name": "Finish project",
+        "Status": "Not-Completed",
+        "Color": "#98FB98"
+      },
+      {
+        "ID": "5",
+        "Name": "Clean the house",
+        "Status": "Not-Completed",
+        "Color": "#FFA07A"
+      },
+      {
+        "ID": "6",
+        "Name": "Buy groceries",
+        "Status": "Not-Completed",
+        "Color": "#FFDAB9"
+      },
+      {
+        "ID": "7",
+        "Name": "Walk the dog",
+        "Status": "Not-Completed",
+        "Color": "#B0E0E6"
+      },
+      {
+        "ID": "8",
+        "Name": "Call mom",
+        "Status": "Not-Completed",
+        "Color": "#FFC0CB"
+      },
+      {
+        "ID": "9",
+        "Name": "Pay bills",
+        "Status": "Not-Completed",
+        "Color": "#E6E6FA"
+      },
+      {
+        "ID": "10",
+        "Name": "Write report",
+        "Status": "Not-Completed",
+        "Color": "#F0E68C"
+      },
+      {
+        "ID": "11",
+        "Name": "Call mom",
+        "Status": "Not-Completed",
+        "Color": "#FFC0CB"
+      },
+      {
+        "ID": "12",
+        "Name": "Pay bills",
+        "Status": "Not-Completed",
+        "Color": "#E6E6FA"
+      },
+      {
+        "ID": "13",
+        "Name": "Write report",
+        "Status": "Not-Completed",
+        "Color": "#F0E68C"
+      }
+    ]
+  }
+  
