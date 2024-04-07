@@ -43,7 +43,7 @@ switch ($metodo) {
 }
 
 function consulta($conexion,$id){
-    $sql = ($id===null)?"SELECT * FROM usuario":"SELECT * FROM usuario WHERE id= $id";
+    $sql = ($id===null)?"SELECT * FROM user":"SELECT * FROM user WHERE id= $id";
     $resultado = $conexion->query($sql);
 
     if($resultado){
