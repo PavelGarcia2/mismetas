@@ -23,6 +23,12 @@
 
         // Display data 
         //print_r($json_data["tasks"]);
+        $ch = curl_init("http://localhost/taskatsApiRest/users/"); // such as http://example.com/example.xml
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $dataApi = curl_exec($ch);
+        curl_close($ch);
+        echo $dataApi;
         ?>
         <?php
         $dailyScore = 0;
@@ -44,7 +50,9 @@
                     <?php foreach ($json_data["tasks"] as $value) : ?>
                         <div class="item" cid=<?php echo $value["ID"] ?> data-status=<?php echo $value["Status"] ?>>
                             <div class="delete">
-                                <input type="checkbox" id=<?php echo $value["ID"] ?> value="second_checkbox" <?php if($value["Status"]==='Completed'){echo 'checked'; }?> />
+                                <input type="checkbox" id=<?php echo $value["ID"] ?> value="second_checkbox" <?php if ($value["Status"] === 'Completed') {
+                                                                                                                    echo 'checked';
+                                                                                                                } ?> />
                             </div>
                             <h5><?php echo $value["Name"] ?></h5>
 

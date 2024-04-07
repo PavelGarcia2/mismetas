@@ -17,7 +17,7 @@
       {
         "ID": "3",
         "Name": "Read a book",
-        "Status": "Not-Completed",
+        "Status": "Completed",
         "Color": "#FFD700",
         "Punctuation" :"3"
       }
