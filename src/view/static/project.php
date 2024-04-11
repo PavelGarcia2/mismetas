@@ -12,7 +12,7 @@
 <body>
     <main>
         <div class="logo d-flex justify-content-center">
-            <h1>Taskats</h1>
+            <h1>Taskats One project</h1>
         </div>
 
         <!-- Fetching the tasks of today which are not completed!-->
@@ -41,11 +41,6 @@
         ?>
 
         <div class="container">
-            <div class="add_wrapp">
-                <input type="text" class="todo_name">
-                <button class="add_todo">Add</button>
-            </div>
-            <h5 style="color: #ffd700;">Score : <?php echo $dailyScore ?></h5>
             <div class="todo_wrapp">
                 <div class="wrapper scrollable-inv">
                     <?php foreach ($json_data["tasks"] as $value) : ?>
@@ -75,17 +70,15 @@
                 let style = `
                 .item[cid="${task.ID}"] {
                     background-color: ${color};
-                    
                 }
 
                 input[id="${task.ID}"] {
                     accent-color: ${color};
-                    
                 }
 
-
-
-
+                input[id="${task.ID}"]:before {
+                    background-color:${color};
+                }
             `;
 
                 // Create a style element and append it to the document's head

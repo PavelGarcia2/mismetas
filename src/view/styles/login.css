@@ -28,6 +28,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  
 }
 
 form {
@@ -37,9 +38,8 @@ form {
   transform: translate(-50%, -50%);
   width: 300px;
   padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #ffffff;
+  background: linear-gradient(90deg, #9130bed5, rgba(34, 93, 85, 0.842)) !important;;
   
   display: flex;
   flex-direction: column;
