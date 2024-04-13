@@ -27,15 +27,19 @@
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         $dataApi = curl_exec($ch);
+
         curl_close($ch);
-        $json_data = json_decode($dataApi,true);
-        $json_encoded_data = json_encode($json_data["tasks"]);
-        ?>
-        <?php
+        $json_data = json_decode($dataApi, true);
+        print_r($json_data);
+
+
         $dailyScore = 0;
-        foreach ($json_data["tasks"] as $value) {
-            if ($value["Status"]) {
-                $dailyScore += $value["Punctuation"];
+        if ($json_data["status"] != 'error') {
+            $json_encoded_data = json_encode($json_data["tasks"]);
+            foreach ($json_data["tasks"] as $value) {
+                if ($value["Status"]) {
+                    $dailyScore += $value["Punctuation"];
+                }
             }
         }
         ?>
@@ -48,18 +52,20 @@
             <h5 style="color: #ffd700;">Score : <?php echo $dailyScore ?></h5>
             <div class="todo_wrapp">
                 <div class="wrapper scrollable-inv">
-                    <?php foreach ($json_data["tasks"] as $value) : ?>
-                        <div class="item" cid=<?php echo $value["ID"] ?> data-status=<?php echo $value["Status"] ?>>
-                            <div class="delete">
-                                <input type="checkbox" id=<?php echo $value["ID"] ?> value="second_checkbox" <?php if ($value["Status"]) {
-                                                                                                                    echo 'checked';
-                                                                                                                } ?> />
+                    <?php if ($json_data["status"] != 'error') :
+                        foreach ($json_data["tasks"] as $value) : ?>
+                            <div class="item" cid=<?php echo $value["ID"] ?> data-status=<?php echo $value["Status"] ?>>
+                                <div class="delete">
+                                    <input type="checkbox" id=<?php echo $value["ID"] ?> value="second_checkbox" <?php if ($value["Status"]) {
+                                                                                                                        echo 'checked';
+                                                                                                                    } ?> />
+                                </div>
+                                <h5><?php echo $value["Name"] ?></h5>
+
                             </div>
-                            <h5><?php echo $value["Name"] ?></h5>
 
-                        </div>
-
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

@@ -69,9 +69,7 @@
                     accent-color: ${color};
                 }
 
-                input[id="${task.project_id}"]:before {
-                    background-color:${color};
-                }
+                
             `;
 
                 // Create a style element and append it to the document's head
